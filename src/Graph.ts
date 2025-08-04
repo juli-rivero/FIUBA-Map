@@ -341,6 +341,13 @@ const Graph = (userContext: UserType.Context): GraphType.Context => {
       }),
     );
 
+    // Los nodos ocultos siguen molestando, así que los ponemos en un lugar que no moleste
+    const hidden = getters.Hidden();
+    toUpdate.push(...balanceSinNivel(hidden, lastLevel+2));
+
+
+    console.log(toUpdate)
+
     nodes.update(toUpdate);
 
     // Le tiramos un centro a visjs y le pedimos que redibuje
@@ -1093,6 +1100,12 @@ const Graph = (userContext: UserType.Context): GraphType.Context => {
         ? nodes.get({
             filter: (n) =>
               n.categoria !== "*CBC" && (n.cuatrimestre || n.nota >= -1),
+          })
+        : [],
+    Hidden: () =>
+      nodes
+        ? nodes.get({
+            filter: (n) => n.hidden,
           })
         : [],
     Shown: () =>

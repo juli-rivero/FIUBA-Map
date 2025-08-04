@@ -25,6 +25,7 @@ export namespace GraphType {
     CategoriaOnly(categoria: string): NodeType[];
     CategoriaRelevantes(categoria: string): NodeType[];
     AllRelevantes(): NodeType[];
+    Hidden(): NodeType[];
     Shown(): NodeType[];
     AllShown(): NodeType[];
     AllShownWithCuatri(): (NodeType & { cuatrimestre: number })[];
