@@ -963,6 +963,13 @@ const Graph = (userContext: UserType.Context): GraphType.Context => {
       // click en otro nodo/click en cualquier lado del mapa: deseleccionar lo que teniamos
       deselectNode(true);
     },
+    dragStart: (e: ReactGraphVisType.ClickEvent) => {
+      // Cuando arrastramos un nodo, deshabilitamos la fisica para que no se mueva todo el grafo y sea mas fácil intercambiarlo de lugar
+      network.setOptions({ physics: { enabled: false } });
+    },
+    dragEnd: (e: ReactGraphVisType.ClickEvent) => {
+      network.setOptions({ physics: { enabled: true } });
+    },
   };
 
   // Definimos muuuuchos getters para tener acceso a todo tipo de nodos y no andar repitiendo todo

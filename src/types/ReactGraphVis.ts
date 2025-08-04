@@ -35,6 +35,7 @@ export namespace ReactGraphVisType {
     getConnectedEdges(id: string): string[];
     getSelectedNodes(): string[];
     selectNodes(query: string[]): void;
+    setOptions(options: {}): void;
   }
 
   export interface NodesHandler {
@@ -103,6 +104,8 @@ export namespace ReactGraphVisType {
     blurNode: () => void;
     selectNode: (event: ClickEvent) => void;
     deselectNode: (event: DeselectEvent) => void;
+    dragStart: (event: ClickEvent) => void;
+    dragEnd: (event: ClickEvent) => void;
   }
 
   export interface ClickEvent {
