@@ -345,9 +345,6 @@ const Graph = (userContext: UserType.Context): GraphType.Context => {
     const hidden = getters.Hidden();
     toUpdate.push(...balanceSinNivel(hidden, lastLevel+2));
 
-
-    console.log(toUpdate)
-
     nodes.update(toUpdate);
 
     // Le tiramos un centro a visjs y le pedimos que redibuje
@@ -474,16 +471,8 @@ const Graph = (userContext: UserType.Context): GraphType.Context => {
     actualizar();
     actualizarNiveles();
 
-    const isOpening = categoria.some((n) => !n.hidden);
-    const { x, y } = network.getViewPosition();
 
-    // El 150 esta hardcodeado a la dif de la posicion del nodo del CBC
-    // cuando se prende y cuando se apaga
-    if (isOpening) {
-      network.moveTo({ position: { x: x - 150, y } });
-    } else {
-      network.moveTo({ position: { x: x + 150, y } });
-    }
+    network.fit();
   };
 
   ///
@@ -545,7 +534,9 @@ const Graph = (userContext: UserType.Context): GraphType.Context => {
 
     actualizar();
     actualizarNiveles();
-    network.fit();
+    setTimeout(() => {
+      network.fit();
+    }, 100);
   };
 
   // Se usa on boot para mostrar tooodo lo que le interesa al usuario, y evitarle clicks en la UI ni bien entra
